@@ -8,7 +8,7 @@ export const event: Event = {
     once: true,
     async execute(client): Promise<void> {
         const commands = Array.from(client.commands.values());
-        (await client.guilds.fetch(requireEnv("MY_GUILD_ID"))).commands.set(
+        (await client.guilds.fetch(requireEnv("GUILD_ID"))).commands.set(
             commands
                 .filter((com) =>
                     isSlashCommand(com) || isContextMenuCommand(com)
@@ -16,6 +16,5 @@ export const event: Event = {
                 .map((com) => com.builder.toJSON()),
         );
         console.log(`${client.user?.username} is ready !`);
-        client.user?.setActivity("開発中...", { type: ActivityType.Playing });
     },
 };
